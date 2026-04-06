@@ -1,11 +1,12 @@
-package Kubernetes;
+package com.example;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
+import dev.langchain4j.model.ollama.OllamaChatModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingSearchRequest;
 import dev.langchain4j.store.embedding.EmbeddingSearchResult;
@@ -30,7 +31,7 @@ public class TravelPoliceService {
 
     private final Resource travelPolicyResource;
     private final OpenAiEmbeddingModel embeddingModel;
-    private final OpenAiChatModel chatModel;
+    private final ChatLanguageModel chatModel;
     private final InMemoryEmbeddingStore embeddingStore = new InMemoryEmbeddingStore();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -39,7 +40,7 @@ public class TravelPoliceService {
     public TravelPoliceService(
             @Value("${travel.policy.path:classpath:travel-policy.txt}") Resource travelPolicyResource,
             OpenAiEmbeddingModel embeddingModel,
-            OpenAiChatModel chatModel) {
+            OllamaChatModel chatModel) {
         this.travelPolicyResource = travelPolicyResource;
         this.embeddingModel = embeddingModel;
         this.chatModel = chatModel;
@@ -107,30 +108,6 @@ public class TravelPoliceService {
                 + "Contexto da política: " + policyContext + "\n"
                 + "Despesa: " + expenseDescription + "\n"
                 + "Retorne apenas JSON com campos: allowed (boolean), reason (string), matchedPolicyRule (string).";
-    }
-
-    private boolean parseAllowed(String modelResult) {
-        String lower = modelResult.toLowerCase();
-        if (lower.contains("permit") || lower.contains("permitida") || lower.contains("permitido") || lower.contains("aprov")) {
-            return true;
-        }
-        if (lower.contains("negad") || lower.contains("não permit") || lower.contains("proibid") || lower.contains("recusad")) {
-            return false;
-        }
-        return false;
-    }
-
-    private String parseReason(String modelResult) {
-        String[] lines = modelResult.split("\r?\n");
-        if (lines.length > 1) {
-            for (String line : lines) {
-                if (line.toLowerCase().contains("because") || line.toLowerCase().contains("porque")
-                        || line.toLowerCase().contains("motivo") || line.toLowerCase().contains("razão")) {
-                    return line.trim();
-                }
-            }
-        }
-        return modelResult.trim();
     }
 
     private String loadTravelPolicyDocument() {

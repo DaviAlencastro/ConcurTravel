@@ -1,8 +1,12 @@
 @echo off
 echo Starting Travel Policy Service...
 
+echo Ensure Ollama is running with model llama3.
+echo Run: ollama serve (in another terminal)
+echo Then: ollama pull llama3
+
 if "%OPENAI_API_KEY%"=="" (
-    echo ERROR: OPENAI_API_KEY environment variable is not set.
+    echo ERROR: OPENAI_API_KEY environment variable is not set (needed for embeddings).
     echo Please set it with: set OPENAI_API_KEY=your_api_key_here
     pause
     exit /b 1
