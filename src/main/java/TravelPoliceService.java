@@ -1,5 +1,8 @@
 package com.example;
 
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.langchain4j.data.embedding.Embedding;
@@ -30,7 +33,7 @@ import java.util.stream.Collectors;
 public class TravelPoliceService {
 
     private final Resource travelPolicyResource;
-    private final HuggingFaceEmbeddingModel embeddingModel;
+    private final EmbeddingModel embeddingModel;
     private final ChatLanguageModel chatModel;
     private final InMemoryEmbeddingStore embeddingStore = new InMemoryEmbeddingStore();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -38,9 +41,9 @@ public class TravelPoliceService {
     private List<TextSegment> policySegments = Collections.emptyList();
 
     public TravelPoliceService(
-            @Value("${travel.policy.path:classpath:travel-policy.txt}") Resource travelPolicyResource,
-            HuggingFaceEmbeddingModel embeddingModel,
-            OllamaChatModel chatModel) {
+            @Value("${travel.policy.path:classpath:travel-policy.txt}") Resource travelPolicyResource, 
+                           EmbeddingModel embeddingModel, 
+                           ChatLanguageModel chatModel) {
         this.travelPolicyResource = travelPolicyResource;
         this.embeddingModel = embeddingModel;
         this.chatModel = chatModel;
