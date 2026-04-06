@@ -1,9 +1,0 @@
-Regra 1: Despesas com refeições em viagens nacionais são permitidas até R$ 250 por refeição, desde que realizdas em restaurantes cadastrados.
-
-Regra 2: Despesas de hospedagem são permitidas apenas para hotéis com valor máximo de R$ 600 por diária em viagens nacionais e R$ 1.500 por diária em viagens internacionais.
-
-Regra 3: Itens de luxo, como spas, excursões pessoais ou upgrades de quarto, são proibidos e não devem ser reembolsados.
-
-Regra 4: Despesas com transporte terrestre são permitidas apenas quando necessárias para deslocamento entre aeroporto, hotel e local de reunião.
-
-Regra 5: Bebidas alcoólicas só são permitidas em eventos corporativos aprovados e quando incluídas na política de reembolso específica.
