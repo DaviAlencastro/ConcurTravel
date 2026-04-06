@@ -1,5 +1,6 @@
 com\example\TravelController.class
 com\example\TravelExpenseRequest.class
+com\example\EmbeddingConfig.class
 com\example\TravelApplication.class
 com\example\TravelPolicyResponse.class
 com\example\TravelPoliceService.class

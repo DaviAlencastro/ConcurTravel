@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
+import dev.langchain4j.model.huggingface.HuggingFaceEmbeddingModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingSearchRequest;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class TravelPoliceService {
 
     private final Resource travelPolicyResource;
-    private final OpenAiEmbeddingModel embeddingModel;
+    private final HuggingFaceEmbeddingModel embeddingModel;
     private final ChatLanguageModel chatModel;
     private final InMemoryEmbeddingStore embeddingStore = new InMemoryEmbeddingStore();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -39,7 +39,7 @@ public class TravelPoliceService {
 
     public TravelPoliceService(
             @Value("${travel.policy.path:classpath:travel-policy.txt}") Resource travelPolicyResource,
-            OpenAiEmbeddingModel embeddingModel,
+            HuggingFaceEmbeddingModel embeddingModel,
             OllamaChatModel chatModel) {
         this.travelPolicyResource = travelPolicyResource;
         this.embeddingModel = embeddingModel;
