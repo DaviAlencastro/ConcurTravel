@@ -24,10 +24,10 @@ public class TravelController {
     }
 
     @PostMapping("/check")
-public ResponseEntity<String> check(@RequestBody SearchRequest request) {
-    String response = travelPoliceService.processQuery(request.getQuery()); 
-    return ResponseEntity.ok(response);
-}
+    public ResponseEntity<String> check(@RequestBody SearchRequest request) {
+        String response = travelPoliceService.assessExpenseJson(request.getQuery());
+        return ResponseEntity.ok(response);
+    }
 
     // Uma classe simples (DTO) para o Spring converter o JSON automaticamente
     public static class SearchRequest {
